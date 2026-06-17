@@ -8,6 +8,16 @@ qs=rows.map(r=>{
  return {id:c[0],cat:c[1],part:c[2],sec:c[3],q:c[4],A:c[5],B:c[6],C:c[7],D:c[8],ans:c[9],exp:c.slice(10).join(',')};
 });
 const secs=[...new Set(qs.map(x=>x.sec))];
+ const cats=[...new Set(qs.map(x=>x.cat))];
+
+const c=document.getElementById('categoryFilter');
+
+cats.forEach(v=>{
+ let o=document.createElement('option');
+ o.value=v;
+ o.textContent=v;
+ c.appendChild(o);
+});
 const s=document.getElementById('sectionFilter');
 secs.forEach(v=>{let o=document.createElement('option');o.value=v;o.textContent=v;s.appendChild(o);});
 filtered=qs; render();
@@ -44,3 +54,17 @@ nextBtn.onclick=()=>{if(idx<filtered.length-1)idx++;render();}
 prevBtn.onclick=()=>{if(idx>0)idx--;render();}
 randomBtn.onclick=()=>{idx=Math.floor(Math.random()*filtered.length);render();}
 sectionFilter.onchange=e=>{filtered=e.target.value?qs.filter(x=>x.sec===e.target.value):qs;idx=0;render();}
+categoryFilter.onchange=e=>{
+ filtered=e.target.value
+ ? qs.filter(x=>x.cat===e.target.value)
+ : qs;
+
+ idx=0;
+ render();
+};
+
+wrongBtn.onclick=()=>{
+ filtered=qs.filter(x=>wrongQuestions.includes(x.id));
+ idx=0;
+ render();
+};
