@@ -1,4 +1,5 @@
 let qs=[],filtered=[],idx=0,correct=0,answered=0;
+let wrongQuestions=[];
 fetch('BJT - quiz.csv').then(r=>r.text()).then(t=>{
 const rows=t.trim().split(/\r?\n/);
 const h=rows.shift();
@@ -27,7 +28,15 @@ stats.textContent=`Đã trả lời: ${answered} | Đúng: ${correct}`;
 function check(v,q,b){
 answered++;
 if(String(v)===String(q.ans)){correct++;b.classList.add('correct');result.textContent='✅ Đúng'}
-else {b.classList.add('wrong');result.textContent='❌ Sai. Đáp án: '+['A','B','C','D'][q.ans-1]}
+else {
+ b.classList.add('wrong');
+
+ if(!wrongQuestions.includes(q.id)){
+   wrongQuestions.push(q.id);
+ }
+
+ result.textContent='❌ Sai. Đáp án: '+['A','B','C','D'][q.ans-1];
+}
 exp.textContent=q.exp;
 stats.textContent=`Đã trả lời: ${answered} | Đúng: ${correct}`;
 }
