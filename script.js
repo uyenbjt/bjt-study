@@ -6,6 +6,7 @@ const h=rows.shift();
 qs=rows.map(r=>{
  const c=r.split(',');
  return {id:c[0],cat:c[1],part:c[2],sec:c[3],q:c[4],A:c[5],B:c[6],C:c[7],D:c[8],ans:c[9],exp:c[10],reading:c[11],trans:c[12]};
+ });
 const secs=[...new Set(qs.map(x=>x.sec))];
  const cats=[...new Set(qs.map(x=>x.cat))];
 
