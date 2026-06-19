@@ -1,160 +1,133 @@
-let qs=[],filtered=[],idx=0,correct=0,answered=0;
-let wrongQuestions=[];
+let qs=[];
+let idx=0;
+let correct=0;
+let answered=0;
 
 fetch('BJT - quiz.csv')
 .then(r=>r.text())
 .then(t=>{
 
 const rows=t.trim().split(/\r?\n/);
+
 rows.shift();
 
 qs=rows.map(r=>{
- const c=r.split(',');
- return {
-  id:c[0],
-  cat:c[1],
-  part:c[2],
-  sec:c[3],
-  q:c[4],
-  A:c[5],
-  B:c[6],
-  C:c[7],
-  D:c[8],
-  ans:c[9],
-  exp:c[10] || '',
-  reading:c[11] || '',
-  trans:c[12] || ''
- };
+
+const c=r.split(',');
+
+return{
+id:c,
+cat:c,
+part:c,
+sec:c,
+q:c,
+A:c,
+B:c,
+C:c,
+D:c,
+ans:c,
+exp:c||'',
+reading:c||'',
+trans:c||''
+};
+
 });
 
-const secs=[...new Set(qs.map(x=>x.sec))];
-const cats=[...new Set(qs.map(x=>x.cat))];
-
-const cat=document.getElementById('categoryFilter');
-cats.forEach(v=>{
- let o=document.createElement('option');
- o.value=v;
- o.textContent=v;
- cat.appendChild(o);
-});
-
-const sec=document.getElementById('sectionFilter');
-secs.forEach(v=>{
- let o=document.createElement('option');
- o.value=v;
- o.textContent=v;
- sec.appendChild(o);
-});
-
-filtered=qs;
 render();
 
 });
 
 function render(){
 
-let q=filtered[idx];
-if(!q) return;
+if(!qs.length)return;
 
-qnum.textContent=`Câu ${idx+1}/${filtered.length}`;
+const q=qs[idx];
 
-question.textContent=q.q;
+document.getElementById('qnum').textContent=
+`Câu ${idx+1}/${qs.length}`;
 
-answers.innerHTML='';
+document.getElementById('question').textContent=
+q.q;
+
+document.getElementById('answers').innerHTML='';
 
 ['A','B','C','D'].forEach((k,i)=>{
 
- let b=document.createElement('button');
+const btn=document.createElement('button');
 
- b.className='ans';
+btn.className='ans';
 
- b.textContent=`${k}. ${q[k]}`;
+btn.textContent=`${k}. ${q[k]}`;
 
- b.onclick=()=>check(i+1,q,b);
+btn.onclick=()=>check(i+1,q,btn);
 
- answers.appendChild(b);
+document.getElementById('answers').appendChild(btn);
 
 });
 
-result.textContent='';
-exp.textContent='';
+document.getElementById('result').innerHTML='';
 
-stats.textContent=`Đã trả lời: ${answered} | Đúng: ${correct}`;
+document.getElementById('detail').innerHTML='';
+
+document.getElementById('stats').textContent=
+`Đã trả lời: ${answered} | Đúng: ${correct}`;
 
 }
 
-function check(v,q,b){
+function check(v,q,btn){
 
 answered++;
 
 if(String(v)===String(q.ans)){
 
- correct++;
+correct++;
 
- b.classList.add('correct');
+btn.classList.add('correct');
 
- result.textContent='✅ Đúng';
+document.getElementById('result').innerHTML='✅ Đúng';
 
 }else{
 
- b.classList.add('wrong');
+btn.classList.add('wrong');
 
- if(!wrongQuestions.includes(q.id)){
-  wrongQuestions.push(q.id);
- }
-
- result.textContent='❌ Sai. Đáp án: '+['A','B','C','D'][q.ans-1];
+document.getElementById('result').innerHTML=
+'❌ Sai. Đáp án: '+['A','B','C','D'][q.ans-1];
 
 }
 
-exp.innerHTML=
-'📖 Cách đọc: '+(q.reading||'')+
-'<br><br>🇻🇳 Dịch: '+(q.trans||'')+
-'<br><br>💡 Giải thích: '+(q.exp||'');
+document.getElementById('detail').innerHTML=
 
-stats.textContent=`Đã trả lời: ${answered} | Đúng: ${correct}`;
+'📖 Cách đọc:<br>'+q.reading+
+
+'<br><br>🇻🇳 Dịch:<br>'+q.trans+
+
+'<br><br>💡 Giải thích:<br>'+q.exp;
+
+document.getElementById('stats').textContent=
+`Đã trả lời: ${answered} | Đúng: ${correct}`;
 
 }
 
-nextBtn.onclick=()=>{
- if(idx<filtered.length-1){
-  idx++;
-  render();
- }
+document.getElementById('nextBtn').onclick=()=>{
+
+if(idx<qs.length-1){
+
+idx++;
+
+render();
+
+}
+
 };
 
-prevBtn.onclick=()=>{
- if(idx>0){
-  idx--;
-  render();
- }
-};
+document.getElementById('prevBtn').onclick=()=>{
 
-randomBtn.onclick=()=>{
- idx=Math.floor(Math.random()*filtered.length);
- render();
-};
+if(idx>0){
 
-sectionFilter.onchange=e=>{
- filtered=e.target.value
- ? qs.filter(x=>x.sec===e.target.value)
- : qs;
+idx--;
 
- idx=0;
- render();
-};
+render();
 
-categoryFilter.onchange=e=>{
- filtered=e.target.value
- ? qs.filter(x=>x.cat===e.target.value)
- : qs;
+}
 
- idx=0;
- render();
-};
-
-wrongBtn.onclick=()=>{
- filtered=qs.filter(x=>wrongQuestions.includes(x.id));
- idx=0;
- render();
 };
