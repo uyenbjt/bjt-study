@@ -9,22 +9,22 @@ const rows=t.trim().split(/\r?\n/);
 rows.shift();
 
 qs=rows.map(r=>{
-const c=r.split(',');
-return {
-id:c,
-cat:c,
-part:c,
-sec:c,
-q:c,
-A:c,
-B:c,
-C:c,
-D:c,
-ans:c,
-exp:c || '',
-reading:c || '',
-trans:c || ''
-};
+ const c=r.split(',');
+ return {
+  id:c[0],
+  cat:c[1],
+  part:c[2],
+  sec:c[3],
+  q:c[4],
+  A:c[5],
+  B:c[6],
+  C:c[7],
+  D:c[8],
+  ans:c[9],
+  exp:c[10] || '',
+  reading:c[11] || '',
+  trans:c[12] || ''
+ };
 });
 
 const secs=[...new Set(qs.map(x=>x.sec))];
@@ -32,18 +32,18 @@ const cats=[...new Set(qs.map(x=>x.cat))];
 
 const cat=document.getElementById('categoryFilter');
 cats.forEach(v=>{
-let o=document.createElement('option');
-o.value=v;
-o.textContent=v;
-cat.appendChild(o);
+ let o=document.createElement('option');
+ o.value=v;
+ o.textContent=v;
+ cat.appendChild(o);
 });
 
 const sec=document.getElementById('sectionFilter');
 secs.forEach(v=>{
-let o=document.createElement('option');
-o.value=v;
-o.textContent=v;
-sec.appendChild(o);
+ let o=document.createElement('option');
+ o.value=v;
+ o.textContent=v;
+ sec.appendChild(o);
 });
 
 filtered=qs;
@@ -64,15 +64,15 @@ answers.innerHTML='';
 
 ['A','B','C','D'].forEach((k,i)=>{
 
-let b=document.createElement('button');
+ let b=document.createElement('button');
 
-b.className='ans';
+ b.className='ans';
 
-b.textContent=`${k}. ${q[k]}`;
+ b.textContent=`${k}. ${q[k]}`;
 
-b.onclick=()=>check(i+1,q,b);
+ b.onclick=()=>check(i+1,q,b);
 
-answers.appendChild(b);
+ answers.appendChild(b);
 
 });
 
@@ -89,21 +89,21 @@ answered++;
 
 if(String(v)===String(q.ans)){
 
-correct++;
+ correct++;
 
-b.classList.add('correct');
+ b.classList.add('correct');
 
-result.textContent='✅ Đúng';
+ result.textContent='✅ Đúng';
 
 }else{
 
-b.classList.add('wrong');
+ b.classList.add('wrong');
 
-if(!wrongQuestions.includes(q.id)){
-wrongQuestions.push(q.id);
-}
+ if(!wrongQuestions.includes(q.id)){
+  wrongQuestions.push(q.id);
+ }
 
-result.textContent='❌ Sai. Đáp án: '+['A','B','C','D'][q.ans-1];
+ result.textContent='❌ Sai. Đáp án: '+['A','B','C','D'][q.ans-1];
 
 }
 
@@ -117,54 +117,44 @@ stats.textContent=`Đã trả lời: ${answered} | Đúng: ${correct}`;
 }
 
 nextBtn.onclick=()=>{
-if(idx<filtered.length-1){
-idx++;
-render();
-}
+ if(idx<filtered.length-1){
+  idx++;
+  render();
+ }
 };
 
 prevBtn.onclick=()=>{
-if(idx>0){
-idx--;
-render();
-}
+ if(idx>0){
+  idx--;
+  render();
+ }
 };
 
 randomBtn.onclick=()=>{
-
-filtered=[...filtered];
-
-for(let i=filtered.length-1;i>0;i--){
-const j=Math.floor(Math.random()*(i+1));
-[filtered[i],filtered[j]]=[filtered[j],filtered[i]];
-}
-
-idx=0;
-
-render();
-
+ idx=Math.floor(Math.random()*filtered.length);
+ render();
 };
 
 sectionFilter.onchange=e=>{
-filtered=e.target.value
-? qs.filter(x=>x.sec===e.target.value)
-: qs;
+ filtered=e.target.value
+ ? qs.filter(x=>x.sec===e.target.value)
+ : qs;
 
-idx=0;
-render();
+ idx=0;
+ render();
 };
 
 categoryFilter.onchange=e=>{
-filtered=e.target.value
-? qs.filter(x=>x.cat===e.target.value)
-: qs;
+ filtered=e.target.value
+ ? qs.filter(x=>x.cat===e.target.value)
+ : qs;
 
-idx=0;
-render();
+ idx=0;
+ render();
 };
 
 wrongBtn.onclick=()=>{
-filtered=qs.filter(x=>wrongQuestions.includes(x.id));
-idx=0;
-render();
+ filtered=qs.filter(x=>wrongQuestions.includes(x.id));
+ idx=0;
+ render();
 };
