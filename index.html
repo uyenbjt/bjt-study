@@ -1,34 +1,59 @@
 <!DOCTYPE html>
-<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BJT Study</title><link rel="stylesheet" href="style.css"></head>
+
+<html lang="vi">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BJT Study</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
 <body>
-<div class="wrap">
+
+<div class="container">
+
 <h1>BJT Study</h1>
-<div class="top">
+
+<div class="filters">
+
 <select id="categoryFilter">
-  <option value="">Tất cả chủ đề</option>
+<option value="">📂 Tất cả chủ đề</option>
 </select>
 
 <select id="sectionFilter">
-  <option value="">Tất cả Section</option>
+<option value="">📂 Tất cả Section</option>
 </select>
 
-<button id="wrongBtn">Ôn câu sai</button>
-<button id="randomBtn">Random</button>
+<button id="shuffleBtn">🔀 Trộn lại</button> <button id="wrongBtn">❌ Ôn câu sai</button> <button id="resetBtn">🔄 Reset tiến độ</button>
 
 </div>
+
 <div id="stats"></div>
-<div id="card">
+
+<div class="card">
+
 <div id="qnum"></div>
-<h3 id="question"></h3>
+
+<h2 id="question"></h2>
+
 <div id="answers"></div>
+
 <div id="result"></div>
-<div id="exp"></div>
+
+<div id="detail"></div>
+
 <div class="nav">
-<button id="prevBtn">Câu trước</button>
-<button id="nextBtn">Câu tiếp</button>
+
+<button id="prevBtn">◀ Câu trước</button> <button id="nextBtn">▶ Câu tiếp</button>
+
 </div>
+
 </div>
+
 </div>
+
 <script src="script.js"></script>
-</body></html>
+
+</body>
+</html>
