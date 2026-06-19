@@ -1,0 +1,10 @@
+
+body{font-family:Arial,sans-serif;background:#f3f4f6;margin:0}
+.container{max-width:1000px;margin:auto;background:#fff;padding:20px}
+.toolbar,.nav{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+button,select{padding:10px}
+#question{font-size:24px;font-weight:bold;margin:20px 0}
+.answer-btn{display:block;width:100%;padding:12px;margin:6px 0;text-align:left}
+.correct{background:#c8f7c5}
+.wrong{background:#ffd3d3}
+#detail,#result,#stats,#counter{margin:12px 0}

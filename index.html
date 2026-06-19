@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BJT Study</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+<div class="container">
+<h1>BJT Study</h1>
+
+<div class="toolbar">
+<select id="categoryFilter"><option value="">📂 Tất cả chủ đề</option></select>
+<select id="sectionFilter"><option value="">📂 Tất cả Section</option></select>
+
+<button id="shuffleBtn">🔀 Trộn lại</button>
+<button id="wrongBtn">❌ Ôn câu sai</button>
+<button id="resetBtn">🔄 Reset tiến độ</button>
+<button id="speakBtn">🔊 Đọc</button>
+</div>
+
+<div id="stats"></div>
+<div id="counter"></div>
+<div id="question"></div>
+<div id="answers"></div>
+<div id="result"></div>
+<div id="detail"></div>
+
+<div class="nav">
+<button id="prevBtn">⬅ Trước</button>
+<button id="nextBtn">Tiếp ➡</button>
+</div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
