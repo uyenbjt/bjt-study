@@ -198,3 +198,9 @@ speakBtn.onclick=()=>{
  u.lang="ja-JP";
  speechSynthesis.speak(u);
 };
+
+questionTypeFilter.onchange=applyFilters;
+categoryFilter.onchange=applyFilters;
+sectionFilter.onchange=applyFilters;
+
+console.log("FILTER EVENT READY");
