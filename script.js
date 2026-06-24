@@ -76,10 +76,12 @@ types.forEach(v=>{
 }
 
 function applyFilters(){
+ const type=questionTypeFilter.value;
  const cat=categoryFilter.value;
  const sec=sectionFilter.value;
 
  filtered=questions.filter(q=>
+   (!type || q.QuestionType===type) &&
    (!cat || q.Category===cat) &&
    (!sec || q.Section===sec)
  );
