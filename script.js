@@ -48,58 +48,57 @@ Papa.parse("BJT - quiz.csv",{
 
 function buildFilters(){
 
- const types=[...new Set(questions.map(x=>x.QuestionType))];
-const cats=[...new Set(questions.map(x=>x.Category))];
-const secs=[...new Set(questions.map(x=>x.Section))];
+questionTypeFilter.innerHTML='<option value="">📚 Tất cả QuestionType</option>';
+categoryFilter.innerHTML='<option value="">📂 Tất cả chủ đề</option>';
+sectionFilter.innerHTML='<option value="">📂 Tất cả Section</option>';
+
+const types=[...new Set(questions.map(q=>q.QuestionType))];
+const secs=[...new Set(questions.map(q=>q.Section))];
 
 types.forEach(v=>{
- let o=document.createElement("option");
- o.value=v;o.textContent=v;
- questionTypeFilter.appendChild(o);
+let o=document.createElement("option");
+o.value=v;
+o.textContent=v;
+questionTypeFilter.appendChild(o);
 });
- 
- cats.forEach(v=>{
-  let o=document.createElement("option");
-  o.value=v;o.textContent=v;
-  categoryFilter.appendChild(o);
- });
 
- secs.forEach(v=>{
-  let o=document.createElement("option");
-  o.value=v;o.textContent=v;
-  sectionFilter.appendChild(o);
- });
+secs.forEach(v=>{
+let o=document.createElement("option");
+o.value=v;
+o.textContent=v;
+sectionFilter.appendChild(o);
+});
+
+updateCategoryFilter();
 }
-
-questionTypeFilter.onchange=()=>{
-console.log("TYPE CHANGED");
- updateCategoryFilter();
- };
-categoryFilter.onchange=applyFilters;
-sectionFilter.onchange=applyFilters;
 
 function updateCategoryFilter(){
 
- console.log("UPDATE CATEGORY LOADED");
+const type=questionTypeFilter.value;
+const oldValue=categoryFilter.value;
 
- const type=questionTypeFilter.value;
+const cats=[...new Set(
+questions
+.filter(q=>!type || q.QuestionType===type)
+.map(q=>q.Category)
+)];
 
- const cats=[...new Set(
-  questions
-   .filter(q=>!type || q.QuestionType===type)
-   .map(q=>q.Category)
- )];
+categoryFilter.innerHTML='<option value="">📂 Tất cả chủ đề</option>';
 
- categoryFilter.innerHTML='<option value="">📂 Tất cả chủ đề</option>';
+cats.forEach(v=>{
+let o=document.createElement("option");
+o.value=v;
+o.textContent=v;
+categoryFilter.appendChild(o);
+});
 
- cats.forEach(v=>{
-  let o=document.createElement("option");
-  o.value=v;
-  o.textContent=v;
-  categoryFilter.appendChild(o);
- });
+if(cats.includes(oldValue)){
+categoryFilter.value=oldValue;
+}
 
 }
+
+
 function applyFilters(){
  const type=questionTypeFilter.value;
 
@@ -184,6 +183,11 @@ function updateStats(){
  | Sai: ${stats.wrong}
  | Tỷ lệ đúng: ${rate}%`;
 }
+
+questionTypeFilter.onchange=()=>{
+ updateCategoryFilter();
+ applyFilters();
+};
 
 categoryFilter.onchange=applyFilters;
 sectionFilter.onchange=applyFilters;
