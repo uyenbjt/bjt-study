@@ -77,6 +77,8 @@ sectionFilter.onchange=applyFilters;
 
 function updateCategoryFilter(){
 
+ console.log("UPDATE CATEGORY LOADED");
+
  const type=questionTypeFilter.value;
 
  const cats=[...new Set(
