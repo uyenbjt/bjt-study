@@ -174,6 +174,7 @@ counter.innerHTML=`Câu ${idx+1}/${filtered.length} | Tổng ${totalType} câu`;
 
  updateStats();
  saveState();
+ startTimer();
 }
 
 function updateStats(){
