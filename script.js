@@ -47,9 +47,12 @@ Papa.parse("BJT - quiz.csv",{
 });
 
 function buildFilters(){
+
+ console.log(questions[0]);
+
  const types=[...new Set(questions.map(x=>x.QuestionType))];
- const cats=[...new Set(questions.map(x=>x.Category))];
- const secs=[...new Set(questions.map(x=>x.Section))];
+const cats=[...new Set(questions.map(x=>x.Category))];
+const secs=[...new Set(questions.map(x=>x.Section))];
 
 types.forEach(v=>{
  let o=document.createElement("option");
