@@ -72,6 +72,7 @@ types.forEach(v=>{
 }
 
 questionTypeFilter.onchange=()=>{
+console.log("TYPE CHANGED");
  updateCategoryFilter();
  };
 categoryFilter.onchange=applyFilters;
