@@ -75,6 +75,10 @@ types.forEach(v=>{
  });
 }
 
+questionTypeFilter.onchange=applyFilters;
+categoryFilter.onchange=applyFilters;
+sectionFilter.onchange=applyFilters;
+
 function applyFilters(){
  const type=questionTypeFilter.value;
  const cat=categoryFilter.value;
