@@ -4,6 +4,10 @@ let idx=0;
 let wrongQuestions=[];
 let stats={answered:0,correct:0,wrong:0};
 
+const questionTypeFilter=document.getElementById("questionTypeFilter");
+const categoryFilter=document.getElementById("categoryFilter");
+const sectionFilter=document.getElementById("sectionFilter");
+
 function saveState(){
  localStorage.setItem("bjtStudy",JSON.stringify({
   idx,wrongQuestions,stats,
