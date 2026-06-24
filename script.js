@@ -71,7 +71,10 @@ types.forEach(v=>{
  });
 }
 
-questionTypeFilter.onchange=applyFilters;
+questionTypeFilter.onchange=()=>{
+ updateCategoryFilter();
+ applyFilters();
+};
 categoryFilter.onchange=applyFilters;
 sectionFilter.onchange=applyFilters;
 
@@ -100,7 +103,7 @@ function updateCategoryFilter(){
 function applyFilters(){
  const type=questionTypeFilter.value;
 
- updateCategoryFilter();
+// updateCategoryFilter();
  
  const cat=categoryFilter.value;
  const sec=sectionFilter.value;
