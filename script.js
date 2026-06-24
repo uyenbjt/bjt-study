@@ -48,10 +48,6 @@ Papa.parse("BJT - quiz.csv",{
 
 function buildFilters(){
 
- questions=res.data;
-console.log(res.data[0]);
-filtered=[...questions];
-
  const types=[...new Set(questions.map(x=>x.QuestionType))];
 const cats=[...new Set(questions.map(x=>x.Category))];
 const secs=[...new Set(questions.map(x=>x.Section))];
