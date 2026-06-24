@@ -204,3 +204,5 @@ categoryFilter.onchange=applyFilters;
 sectionFilter.onchange=applyFilters;
 
 console.log("FILTER EVENT READY");
+
+alert("SCRIPT LOADED");
