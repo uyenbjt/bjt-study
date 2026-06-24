@@ -75,8 +75,31 @@ questionTypeFilter.onchange=applyFilters;
 categoryFilter.onchange=applyFilters;
 sectionFilter.onchange=applyFilters;
 
+function updateCategoryFilter(){
+
+ const type=questionTypeFilter.value;
+
+ const cats=[...new Set(
+  questions
+   .filter(q=>!type || q.QuestionType===type)
+   .map(q=>q.Category)
+ )];
+
+ categoryFilter.innerHTML='<option value="">📂 Tất cả chủ đề</option>';
+
+ cats.forEach(v=>{
+  let o=document.createElement("option");
+  o.value=v;
+  o.textContent=v;
+  categoryFilter.appendChild(o);
+ });
+
+}
 function applyFilters(){
  const type=questionTypeFilter.value;
+
+ updateCategoryFilter();
+ 
  const cat=categoryFilter.value;
  const sec=sectionFilter.value;
 
