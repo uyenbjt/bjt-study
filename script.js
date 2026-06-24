@@ -73,8 +73,7 @@ types.forEach(v=>{
 
 questionTypeFilter.onchange=()=>{
  updateCategoryFilter();
- applyFilters();
-};
+ };
 categoryFilter.onchange=applyFilters;
 sectionFilter.onchange=applyFilters;
 
@@ -103,8 +102,6 @@ function updateCategoryFilter(){
 function applyFilters(){
  const type=questionTypeFilter.value;
 
-// updateCategoryFilter();
- 
  const cat=categoryFilter.value;
  const sec=sectionFilter.value;
 
@@ -225,10 +222,3 @@ speakBtn.onclick=()=>{
  speechSynthesis.speak(u);
 };
 
-questionTypeFilter.onchange=applyFilters;
-categoryFilter.onchange=applyFilters;
-sectionFilter.onchange=applyFilters;
-
-console.log("FILTER EVENT READY");
-
-alert("SCRIPT LOADED");
