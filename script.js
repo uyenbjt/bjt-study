@@ -33,6 +33,39 @@ function shuffle(arr){
  }
 }
 
+function stopTimer(){
+ clearInterval(timerInterval);
+ timerInterval=null;
+ const timer=document.getElementById("timer");
+ if(timer) timer.textContent="";
+}
+
+function startTimer(){
+ const timerToggle=document.getElementById("timerToggle");
+ const timer=document.getElementById("timer");
+
+ if(!timerToggle || !timer) return;
+
+ if(!timerToggle.checked){
+  stopTimer();
+  return;
+ }
+
+ clearInterval(timerInterval);
+
+ timeLeft=15;
+ timer.textContent=timeLeft;
+
+ timerInterval=setInterval(()=>{
+  timeLeft--;
+  timer.textContent=timeLeft;
+
+  if(timeLeft<=0){
+   clearInterval(timerInterval);
+   timer.textContent="⏰ Hết giờ";
+  }
+ },1000);
+}
 Papa.parse("BJT - quiz.csv",{
  download:true,
  header:true,
