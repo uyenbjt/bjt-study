@@ -122,7 +122,12 @@ function render(){
 
  const q=filtered[idx];
 
- counter.innerHTML=`Câu ${idx+1}/${filtered.length}`;
+ const totalType=questions.filter(q=>
+ !questionTypeFilter.value ||
+ q.QuestionType===questionTypeFilter.value
+).length;
+
+counter.innerHTML=`Câu ${idx+1}/${filtered.length} | Tổng ${totalType} câu`;
  question.innerHTML=q.Question;
 
  answers.innerHTML="";
