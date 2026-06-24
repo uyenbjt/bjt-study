@@ -77,8 +77,6 @@ sectionFilter.onchange=applyFilters;
 
 function applyFilters(){
  const type=questionTypeFilter.value;
- console.log("TYPE=",type);
- 
  const cat=categoryFilter.value;
  const sec=sectionFilter.value;
 
