@@ -89,6 +89,8 @@ categoryFilter.innerHTML='<option value="">📂 Tất cả chủ đề</option>'
 sectionFilter.innerHTML='<option value="">📂 Tất cả Section</option>';
 
 const types=[...new Set(questions.map(q=>q.QuestionType))];
+console.log(types);
+ 
 const secs=[...new Set(questions.map(q=>q.Section))];
 
 types.forEach(v=>{
