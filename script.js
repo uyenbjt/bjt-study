@@ -4,6 +4,9 @@ let idx=0;
 let wrongQuestions=[];
 let stats={answered:0,correct:0,wrong:0};
 
+let timerInterval=null;
+let timeLeft=15;
+
 const questionTypeFilter=document.getElementById("questionTypeFilter");
 const categoryFilter=document.getElementById("categoryFilter");
 const sectionFilter=document.getElementById("sectionFilter");
