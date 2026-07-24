@@ -263,11 +263,38 @@ resetBtn.onclick=()=>{
  location.reload();
 };
 
+function speakQuestion(q){
+    if(!q) return;
+    speechSynthesis.cancel();
+
+    let text="";
+
+    if(q.Section==="Section1"){
+        const answerKey=["A","B","C","D"][parseInt(q.Answer)-1];
+        text=q[answerKey]||q.Question;
+    }else{
+        text=`${q.Question}
+
+① ${q.A}
+
+② ${q.B}
+
+③ ${q.C}
+
+④ ${q.D}`;
+    }
+
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang="ja-JP";
+    u.rate=0.95;
+    u.pitch=1;
+    u.volume=1;
+
+    speechSynthesis.speak(u);
+}
+
 speakBtn.onclick=()=>{
- if(!filtered.length) return;
- const q=filtered[idx];
- const u=new SpeechSynthesisUtterance(q.ReadingQuestion||q.Question);
- u.lang="ja-JP";
- speechSynthesis.speak(u);
+    if(!filtered.length) return;
+    speakQuestion(filtered[idx]);
 };
 
