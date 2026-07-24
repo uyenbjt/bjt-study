@@ -273,15 +273,23 @@ function speakQuestion(q){
         const answerKey=["A","B","C","D"][parseInt(q.Answer)-1];
         text=q[answerKey]||q.Question;
     }else{
-        text=`${q.Question}
+       text=`${q.Question}
 
-① ${q.A}
+１番。
 
-② ${q.B}
+${q.A}
 
-③ ${q.C}
+２番。
 
-④ ${q.D}`;
+${q.B}
+
+３番。
+
+${q.C}
+
+４番。
+
+${q.D}`;
     }
 
     const u=new SpeechSynthesisUtterance(text);
