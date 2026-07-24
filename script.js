@@ -263,6 +263,25 @@ resetBtn.onclick=()=>{
  location.reload();
 };
 
+let japaneseVoice = null;
+
+function loadJapaneseVoice() {
+    const voices = speechSynthesis.getVoices();
+
+    japaneseVoice =
+        voices.find(v => v.name.includes("Google 日本語")) ||
+        voices.find(v => v.name.includes("Google Japanese")) ||
+        voices.find(v => v.name.includes("Microsoft Nanami")) ||
+        voices.find(v => v.name.includes("Microsoft Keita")) ||
+        voices.find(v => v.name.includes("Microsoft Sayaka")) ||
+        voices.find(v => v.lang === "ja-JP") ||
+        null;
+}
+
+// Chrome thường tải voice sau khi mở trang
+speechSynthesis.onvoiceschanged = loadJapaneseVoice;
+loadJapaneseVoice();
+
 function speakQuestion(q){
     if(!q) return;
     speechSynthesis.cancel();
@@ -297,7 +316,7 @@ ${q.D}`;
     u.rate=0.95;
     u.pitch=1;
     u.volume=1;
-
+    u.voice = japaneseVoice;
     speechSynthesis.speak(u);
 }
 
