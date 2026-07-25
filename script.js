@@ -331,7 +331,8 @@ ${q.D}`;
     u.volume=1;
     u.voice = japaneseVoice;
  
- console.log("Rate =", u.rate);
+ console.log("Voice =", u.voice ? u.voice.name : "Default");
+console.log("Rate =", u.rate);
  
     speechSynthesis.speak(u);
 }
