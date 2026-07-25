@@ -265,6 +265,19 @@ resetBtn.onclick=()=>{
 
 let japaneseVoice = null;
 
+let speechRate = parseFloat(localStorage.getItem("speechRate")) || 1.0;
+
+const pauseBtn = document.getElementById("pauseBtn");
+const stopBtn = document.getElementById("stopBtn");
+const speedSelect = document.getElementById("speedSelect");
+
+speedSelect.value = speechRate;
+
+speedSelect.onchange = () => {
+    speechRate = parseFloat(speedSelect.value);
+    localStorage.setItem("speechRate", speechRate);
+};
+
 function loadJapaneseVoice() {
     const voices = speechSynthesis.getVoices();
 
@@ -313,7 +326,7 @@ ${q.D}`;
 
     const u=new SpeechSynthesisUtterance(text);
     u.lang="ja-JP";
-    u.rate=0.95;
+    u.rate = speechRate;
     u.pitch=1;
     u.volume=1;
     u.voice = japaneseVoice;
