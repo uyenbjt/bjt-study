@@ -265,7 +265,7 @@ resetBtn.onclick=()=>{
 
 let japaneseVoice = null;
 
-let speechRate = parseFloat(localStorage.getItem("speechRate")) || 1.0;
+let speechRate = localStorage.getItem("speechRate") || "1.00";
 
 const pauseBtn = document.getElementById("pauseBtn");
 const stopBtn = document.getElementById("stopBtn");
