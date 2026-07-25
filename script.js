@@ -330,6 +330,9 @@ ${q.D}`;
     u.pitch=1;
     u.volume=1;
     u.voice = japaneseVoice;
+ 
+ console.log("Rate =", u.rate);
+ 
     speechSynthesis.speak(u);
 }
 
