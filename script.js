@@ -11,23 +11,9 @@ const questionTypeFilter=document.getElementById("questionTypeFilter");
 const categoryFilter=document.getElementById("categoryFilter");
 const sectionFilter=document.getElementById("sectionFilter");
 
-function saveState(){
- localStorage.setItem("bjtStudy",JSON.stringify({
-  idx,wrongQuestions,stats,
-  filteredIds:filtered.map(q=>q.ID)
- }));
-}
 
-function loadState(){
- const s=localStorage.getItem("bjtStudy");
- if(!s) return;
- try{
-  const d=JSON.parse(s);
-  idx=d.idx||0;
-  wrongQuestions=d.wrongQuestions||[];
-  stats=d.stats||stats;
- }catch(e){}
-}
+
+
 
 function shuffle(arr){
  for(let i=arr.length-1;i>0;i--){
@@ -215,18 +201,7 @@ counter.innerHTML=`Câu ${idx+1}/${filtered.length} | Tổng ${totalType} câu`;
  startTimer();
 }
 
-function updateStats(){
- const rate=stats.answered
- ? ((stats.correct/stats.answered)*100).toFixed(1)
- : "0.0";
 
- statsDiv=document.getElementById("stats");
- statsDiv.innerHTML=`
- Đã trả lời: ${stats.answered}
- | Đúng: ${stats.correct}
- | Sai: ${stats.wrong}
- | Tỷ lệ đúng: ${rate}%`;
-}
 
 questionTypeFilter.onchange=()=>{
  updateCategoryFilter();
