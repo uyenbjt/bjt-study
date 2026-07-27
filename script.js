@@ -93,6 +93,7 @@ o.textContent=v;
 sectionFilter.appendChild(o);
 });
 
+updateQuestionTypeFilter();
 updateCategoryFilter();
 }
 function updateQuestionTypeFilter(){
