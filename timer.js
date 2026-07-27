@@ -1,66 +1,72 @@
-// =========================
-// TIMER MODULE
-// =========================
+// ===============================
+// BJT Study v2.0
+// timer.js
+// ===============================
 
-let timer = null;
-let timeLeft = 15;
+const AppTimer = {
 
-function updateTimerDisplay() {
-    const el = document.getElementById("timerDisplay");
-    if (el) {
-        el.textContent = timeLeft;
-    }
-}
+    seconds: 15,
 
-function startTimer() {
+    remain: 15,
 
-    stopTimer();
+    interval: null,
 
-    if (!timerEnabled) return;
+    start() {
 
-    timeLeft = timerSeconds;
-    updateTimerDisplay();
+        this.stop();
 
-    timer = setInterval(() => {
+        this.remain = this.seconds;
 
-        timeLeft--;
+        this.update();
 
-        updateTimerDisplay();
+        this.interval = setInterval(() => {
 
-        if (timeLeft <= 0) {
+            this.remain--;
 
-            stopTimer();
+            this.update();
 
-            setTimeout(() => {
+            if (this.remain <= 0) {
 
-                nextQuestion();
+                this.stop();
 
-            }, 300);
+                AppRender.next();
+
+            }
+
+        }, 1000);
+
+    },
+
+    stop() {
+
+        if (this.interval) {
+
+            clearInterval(this.interval);
+
+            this.interval = null;
 
         }
 
-    }, 1000);
+    },
 
-}
+    reset() {
 
-function stopTimer() {
+        this.stop();
 
-    if (timer) {
+        this.start();
 
-        clearInterval(timer);
+    },
 
-        timer = null;
+    update() {
+
+        const el = document.getElementById("timer");
+
+        if (el) {
+
+            el.textContent = this.remain;
+
+        }
 
     }
 
-}
-
-function resetTimer() {
-
-    stopTimer();
-
-    timeLeft = timerSeconds;
-
-    updateTimerDisplay();
-
-}
+};
