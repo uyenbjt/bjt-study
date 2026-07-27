@@ -272,6 +272,8 @@ let japaneseVoice = null;
 let speechRate = localStorage.getItem("speechRate") || "1.00";
 
 const pauseBtn = document.getElementById("pauseBtn");
+const speakBtn = document.getElementById("speakBtn");
+const resumeBtn = document.getElementById("resumeBtn");
 const stopBtn = document.getElementById("stopBtn");
 const speedSelect = document.getElementById("speedSelect");
 
