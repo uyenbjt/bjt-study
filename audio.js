@@ -1,61 +1,87 @@
-// =========================
-// AUDIO MODULE
-// =========================
+// ===============================
+// BJT Study v2.0
+// audio.js
+// ===============================
 
-let japaneseVoice = null;
-let speechRate = 1;
+const AppAudio = {
 
-function loadJapaneseVoice() {
+    voice: null,
 
-    const voices = speechSynthesis.getVoices();
+    rate: 1,
 
-    japaneseVoice =
-        voices.find(v => v.lang === "ja-JP") ||
-        voices.find(v => v.lang.startsWith("ja")) ||
-        null;
+    speaking: false,
 
-}
+    init() {
 
-speechSynthesis.onvoiceschanged = loadJapaneseVoice;
+        const voices = speechSynthesis.getVoices();
 
-loadJapaneseVoice();
+        this.voice =
+            voices.find(v => v.lang === "ja-JP") ||
+            voices.find(v => v.lang.startsWith("ja")) ||
+            null;
 
-function stopSpeech() {
+    },
 
-    speechSynthesis.cancel();
+    speak(text) {
 
-}
+        if (!text) return;
 
-function pauseSpeech() {
+        speechSynthesis.cancel();
 
-    speechSynthesis.pause();
+        const uttr = new SpeechSynthesisUtterance(text);
 
-}
+        uttr.lang = "ja-JP";
 
-function resumeSpeech() {
+        uttr.rate = this.rate;
 
-    speechSynthesis.resume();
+        if (this.voice) {
 
-}
+            uttr.voice = this.voice;
 
-function speak(text) {
+        }
 
-    if (!text) return;
+        this.speaking = true;
 
-    stopSpeech();
+        uttr.onend = () => {
 
-    const utter = new SpeechSynthesisUtterance(text);
+            this.speaking = false;
 
-    utter.lang = "ja-JP";
+        };
 
-    utter.rate = speechRate;
+        speechSynthesis.speak(uttr);
 
-    if (japaneseVoice) {
+    },
 
-        utter.voice = japaneseVoice;
+    pause() {
+
+        speechSynthesis.pause();
+
+    },
+
+    resume() {
+
+        speechSynthesis.resume();
+
+    },
+
+    stop() {
+
+        speechSynthesis.cancel();
+
+        this.speaking = false;
+
+    },
+
+    setRate(rate) {
+
+        this.rate = rate;
 
     }
 
-    speechSynthesis.speak(utter);
+};
 
-}
+speechSynthesis.onvoiceschanged = () => {
+
+    AppAudio.init();
+
+};
