@@ -95,7 +95,32 @@ sectionFilter.appendChild(o);
 
 updateCategoryFilter();
 }
+function updateQuestionTypeFilter(){
 
+const sec = sectionFilter.value;
+const oldValue = questionTypeFilter.value;
+
+const types = [...new Set(
+questions
+.filter(q => !sec || q.Section === sec)
+.map(q => q.QuestionType)
+)];
+
+questionTypeFilter.innerHTML =
+'<option value="">📚 Tất cả QuestionType</option>';
+
+types.forEach(v=>{
+let o=document.createElement("option");
+o.value=v;
+o.textContent=v;
+questionTypeFilter.appendChild(o);
+});
+
+if(types.includes(oldValue)){
+questionTypeFilter.value=oldValue;
+}
+
+}
 function updateCategoryFilter(){
 
 const type=questionTypeFilter.value;
