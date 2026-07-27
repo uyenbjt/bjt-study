@@ -287,6 +287,8 @@ speedSelect.onchange = () => {
 function loadJapaneseVoice() {
     const voices = speechSynthesis.getVoices();
 
+    console.log("Voices:", voices.map(v => v.name));
+
     japaneseVoice =
         voices.find(v => v.name.includes("Google 日本語")) ||
         voices.find(v => v.name.includes("Google Japanese")) ||
@@ -295,6 +297,8 @@ function loadJapaneseVoice() {
         voices.find(v => v.name.includes("Microsoft Sayaka")) ||
         voices.find(v => v.lang === "ja-JP") ||
         null;
+
+    console.log("Selected voice:", japaneseVoice?.name);
 }
 
 // Chrome thường tải voice sau khi mở trang
