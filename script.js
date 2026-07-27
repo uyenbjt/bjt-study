@@ -234,8 +234,11 @@ questionTypeFilter.onchange=()=>{
 };
 
 categoryFilter.onchange=applyFilters;
-sectionFilter.onchange=applyFilters;
-
+sectionFilter.onchange = () => {
+    updateQuestionTypeFilter();
+    updateCategoryFilter();
+    applyFilters();
+};
 shuffleBtn.onclick=()=>{
  shuffle(filtered);
  idx=0;
