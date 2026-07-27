@@ -1,46 +1,30 @@
 // ===============================
-// BJT Study v2.0
 // data.js
+// Quản lý dữ liệu CSV
 // ===============================
 
-const AppData = {
+let questions = [];
+let filtered = [];
 
-    questions: [],
+function loadData() {
 
-    async load() {
+    Papa.parse("BJT - quiz.csv", {
 
-        return new Promise((resolve, reject) => {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
 
-            Papa.parse("BJT - quiz.csv", {
+        complete: function (res) {
 
-                download: true,
+            questions = res.data;
+            filtered = [...questions];
 
-                header: true,
+            buildFilters();
+            loadState();
+            render();
 
-                skipEmptyLines: true,
+        }
 
-                complete: (result) => {
+    });
 
-                    this.questions = result.data;
-
-                    console.log("CSV Loaded:", this.questions.length);
-
-                    resolve(this.questions);
-
-                },
-
-                error: (err) => {
-
-                    console.error(err);
-
-                    reject(err);
-
-                }
-
-            });
-
-        });
-
-    }
-
-};
+}
