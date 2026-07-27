@@ -345,4 +345,14 @@ speakBtn.onclick=()=>{
     if(!filtered.length) return;
     speakQuestion(filtered[idx]);
 };
+pauseBtn.onclick = () => {
+    speechSynthesis.pause();
+};
 
+resumeBtn.onclick = () => {
+    speechSynthesis.resume();
+};
+
+stopBtn.onclick = () => {
+    speechSynthesis.cancel();
+};
