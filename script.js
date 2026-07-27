@@ -55,7 +55,18 @@ function startTimer(){
   }
  },1000);
 }
-loadData();
+Papa.parse("BJT - quiz.csv",{
+ download:true,
+ header:true,
+ skipEmptyLines:true,
+ complete:function(res){
+   questions=res.data;
+   filtered=[...questions];
+   buildFilters();
+   loadState();
+   render();
+ }
+});
 
 function buildFilters(){
 
