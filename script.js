@@ -347,16 +347,25 @@ console.log("Rate =", u.rate);
     speechSynthesis.speak(u);
 }
 
-speakBtn.onclick=()=>{
-    if(!filtered.length) return;
+speakBtn.onclick = () => {
+
+    if (!filtered.length) return;
+
+    // Nếu đang tạm dừng thì nghe tiếp
+    if (speechSynthesis.paused) {
+        speechSynthesis.resume();
+        return;
+    }
+
+    // Nếu đang đọc thì không đọc chồng lên
+    if (speechSynthesis.speaking) return;
+
+    // Nếu chưa đọc thì bắt đầu đọc
     speakQuestion(filtered[idx]);
 };
+
 pauseBtn.onclick = () => {
     speechSynthesis.pause();
-};
-
-resumeBtn.onclick = () => {
-    speechSynthesis.resume();
 };
 
 stopBtn.onclick = () => {
